@@ -11,5 +11,6 @@ namespace Lab9
         public string Name { get; set; }
         public string Hometown { get; set; }
         public string FavoriteFood { get; set; }
+        public string FavoriteAnimal { get; set; }
     }
 }
