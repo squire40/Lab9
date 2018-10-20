@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace Lab9
 {
+    [DebuggerDisplay("Name {Name}, Hometown {Hometown}, FavoriteFood {FavoriteFood}, FavoriteAnimal {FavoriteAnimal}")]
     public class StudentInfo
     {
         public string Name { get; set; }

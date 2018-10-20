@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab8
+namespace Lab9
 {
     class Program
     {
@@ -46,48 +46,53 @@ namespace Lab8
                 {
                     try
                     {
-                        Console.WriteLine("Student {0} is {1}. What would you like to know about {1}?(enter hometown or favorite food)", num, People[num - 1, 0]);
+                        isInputValid = true;
                         Console.WriteLine($"Student {num} is {student.Name}. What would you like to know about {student.Name}?(enter hometown, favorite food, or favorite animal)");
                         input = Console.ReadLine();
 
-                        if(!input.Equals("hometown", StringComparison.InvariantCultureIgnoreCase) 
+                        if (!input.Equals("hometown", StringComparison.InvariantCultureIgnoreCase)
                             && !input.Equals("favorite food", StringComparison.InvariantCultureIgnoreCase)
                             && !input.Equals("favorite animal", StringComparison.InvariantCultureIgnoreCase))
                         { //if the input doesn't equal to "hometown" or "favorite food" throw to FormatException
                             throw new FormatException("That data does not exist.  Try again (hometown or favorite food)");
                         }
                     }
-                    catch(FormatException ex)//FormatException reads the message above and shows as false/invalid
+                    catch (FormatException ex)//FormatException reads the message above and shows as false/invalid
                     {
                         Console.WriteLine(ex.Message);
                         isInputValid = false;
                     }
-                } while(!isInputValid);//user keep doing this until input is valid
+                } while (!isInputValid);//user keep doing this until input is valid
 
-                if(input.Equals("hometown", StringComparison.InvariantCultureIgnoreCase))
+                if (input.Equals("hometown", StringComparison.InvariantCultureIgnoreCase))
                 { //if user inputs "hometown" display name and hometown
                     Console.WriteLine($"{student.Name}'s hometown is {student.Hometown}.");
                 }
-                else if(input.Equals("favorite food", StringComparison.InvariantCultureIgnoreCase))
+                else if (input.Equals("favorite food", StringComparison.InvariantCultureIgnoreCase))
                 { //if user inputs "favorite food" display name and food
-                    Console.Write($"{student.Name}'s favorite food is {student.FavoriteFood}.");
+                    Console.WriteLine($"{student.Name}'s favorite food is {student.FavoriteFood}.");
                 } //People[num - 1,0]... displays row and columns of the students and their information
                 else
                 {
                     Console.WriteLine($"{student.Name}'s favorite animal is {student.FavoriteAnimal}.");
                 }
 
-                Console.WriteLine("Would you like to know more info about a student or add a student?(enter info or add)");
+                Console.WriteLine("Would you like to know more info about a student or add a student or exit?(enter info or add or exit)");
                 input = Console.ReadLine();
 
                 if (input.Equals("info", StringComparison.InvariantCultureIgnoreCase)) //if the input reads "yes" continue
                 {
                     shouldContinue = true;
                 }
-                else
+                else if(input.Equals("add", StringComparison.InvariantCultureIgnoreCase))
                 {
                     shouldContinue = true;
                     AddStudent();
+                }
+                else
+                {
+                    shouldContinue = false;
+                    Console.WriteLine("Goodbye");
                 }
             } while (shouldContinue);
             Console.ReadKey();
@@ -177,12 +182,13 @@ namespace Lab8
         {
             List<StudentInfo> studentList = new List<StudentInfo>();
 
-            for (int i = 0; i < People.Length; i++)
+            for (int i = 0; i < People.GetLength(0); i++)
             {
                 StudentInfo student = new StudentInfo();
                 student.Name = People[i, 0];
                 student.Hometown = People[i, 1];
                 student.FavoriteFood = People[i, 2];
+                student.FavoriteAnimal = People[i, 3];
                 studentList.Add(student);
             }
 
